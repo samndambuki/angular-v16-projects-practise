@@ -1,10 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminLoadGuard } from './adminload.guard';
 
-const routes: Routes = [{ path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule) }, { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) }];
+const routes: Routes = [
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./features/products/products.module').then(
+        (m) => m.ProductsModule
+      ),
+  },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./features/cart/cart.module').then((m) => m.CartModule),
+  },
+  //admin module wont load unless guard allows it
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./auth/admin/admin.module').then((m) => m.AdminModule),
+    canLoad: [AdminLoadGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
