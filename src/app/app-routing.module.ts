@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoadGuard } from './adminload.guard';
+import { TemplateDrivenFormsComponent } from './template-driven-forms/template-driven-forms.component';
+import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
       import('./auth/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [AdminLoadGuard],
   },
+  { path: 'template', component: TemplateDrivenFormsComponent },
+  { path: 'reactive', component: ReactiveFormsComponent },
 ];
 
 @NgModule({

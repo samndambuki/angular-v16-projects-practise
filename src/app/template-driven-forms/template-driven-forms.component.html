@@ -1,0 +1,17 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <input
+    type="text"
+    name="username"
+    [(ngModel)]="user.username"
+    required
+    minlength="3"
+    #username="ngModel"
+  />
+  <!-- shows validation message if input is invalid and user has interacted with it  -->
+  <div *ngIf="username.invalid && username.touched">
+    <p *ngIf="username.errors?.['required']">Username is required</p>
+    <p *ngIf="username.errors?.['minlength']">Must be at least 3 chatracters</p>
+  </div>
+  <input type="password" name="password" [(ngModel)]="user.password" required />
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>

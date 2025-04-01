@@ -1,0 +1,16 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+  <input type="text" formControlName="username" placeholder="Username" />
+  <div
+    *ngIf="
+      loginForm.controls.username.invalid && loginForm.controls.username.touched
+    "
+  >
+    <p *ngIf="loginForm.controls.username.errors?.['required']">
+      Username is required
+    </p>
+    <p *ngIf="loginForm.controls.username.errors?.['minlength']">
+      Username must have 3 characters
+    </p>
+  </div>
+  <button type="submit">Submit</button>
+</form>
